@@ -1,0 +1,216 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+#controls {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#controls label {
+    margin-right: 10px;
+}
+
+#controls select {
+    padding: 8px;
+    font-size: 1em;
+}
+
+#timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Tímalínan sjálf (ásinn) */
+#timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: #007bff; /* Blár litur */
+    left: 50%;
+    margin-left: -2px;
+    top: 0;
+    bottom: 0;
+    z-index: 1; /* Tryggir að línan sé undir punktum */
+}
+
+.timeline-event {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    box-sizing: border-box; /* Mikilvægt fyrir width/padding */
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out; /* Mýkt í síun */
+}
+
+/* Gámur fyrir atburð vinstra megin */
+.timeline-event.left {
+    left: 0;
+    text-align: right; /* Texti hægra megin */
+}
+
+/* Gámur fyrir atburð hægra megin */
+.timeline-event.right {
+    left: 50%;
+    text-align: left; /* Texti vinstra megin */
+}
+
+/* Punktar á tímalínunni */
+.timeline-event::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: -8px; /* Staðsetning fyrir vinstri */
+    background-color: white;
+    border: 4px solid #007bff; /* Blár rammi */
+    top: 15px;
+    border-radius: 50%;
+    z-index: 2; /* Tryggir að punktar séu yfir línu */
+}
+
+.timeline-event.right::after {
+    left: -8px; /* Staðsetning fyrir hægri */
+}
+
+/* Innihald atburðar (rammi) */
+.event-content {
+    padding: 15px 20px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer; /* Sýnir að hægt er að smella */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.event-content:hover {
+    background-color: #e9ecef;
+    transform: scale(1.02);
+}
+
+.event-content h3 {
+    margin-top: 0;
+    color: #0056b3;
+    font-size: 1.1em;
+}
+.event-content .chapter {
+    font-size: 0.9em;
+    color: #666;
+    display: block; /* Ný lína */
+    margin-bottom: 5px;
+}
+.event-content .involved {
+    font-size: 0.8em;
+    color: #888;
+    font-style: italic;
+    display: block; /* Ný lína */
+    margin-top: 5px;
+}
+
+/* Stílar fyrir síun */
+.timeline-event.dimmed {
+    opacity: 0.3; /* Daufar óviðkomandi atburði */
+}
+.timeline-event.highlight {
+    opacity: 1;
+    /* Gæti bætt við ramma eða öðrum áherslum */
+     border: 2px solid #ffc107; /* Gulur áherslurrammi */
+     transform: scale(1.03);
+}
+.event-content.highlight-content {
+    background-color: #fff3cd; /* Ljósgulur bakgrunnur fyrir áherslu */
+}
+
+
+/* Stílar fyrir Modal/Popup */
+.modal {
+    display: none; /* Falið sjálfgefið */
+    position: fixed;
+    z-index: 100; /* Efst */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Hálfgegnsær svartur */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 70%;
+    max-width: 700px;
+    border-radius: 8px;
+    position: relative; /* Fyrir staðsetningu lokunarhnapps */
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#modal-title {
+    margin-top: 0;
+    color: #0056b3;
+}
+
+/* Fyrir minni skjái */
+@media screen and (max-width: 768px) {
+    /* Setur ásinn til vinstri */
+    #timeline::before {
+        left: 30px;
+        margin-left: 0;
+    }
+
+    /* Allir atburðir koma hægra megin */
+    .timeline-event {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        text-align: left; /* Alltaf texti vinstra megin */
+    }
+
+    .timeline-event.left, .timeline-event.right {
+        left: 0%;
+    }
+
+    /* Færir punktana á ásinn */
+    .timeline-event::after {
+        left: 15px; /* 30px (ás) - 15px (helmingur punkts+border) */
+    }
+    .timeline-event.left::after, .timeline-event.right::after {
+        left: 15px;
+    }
+
+     .modal-content {
+        width: 90%;
+    }
+}

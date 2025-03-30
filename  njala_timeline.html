@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tímalína Brennu-Njáls sögu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Tímalína Brennu-Njáls sögu (Frumgerð)</h1>
+        <p>Veldu persónu til að sía eða auðkenna atburði.</p>
+    </header>
+
+    <div id="controls">
+        <label for="character-filter">Sía eftir persónu:</label>
+        <select id="character-filter">
+            <option value="all">Sýna alla</option>
+            <!-- Valkostir fyrir persónur verða settir inn með JavaScript -->
+        </select>
+    </div>
+
+    <div id="timeline-container">
+        <div id="timeline">
+            <!-- Tímalínu atburðir verða settir inn með JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal/Popup fyrir nánari upplýsingar -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p><strong>Kafli:</strong> <span id="modal-chapter"></span></p>
+            <p><strong>Lýsing:</strong></p>
+            <p id="modal-description"></p>
+            <p><strong>Aðrar persónur nefndar:</strong> <span id="modal-involved"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
